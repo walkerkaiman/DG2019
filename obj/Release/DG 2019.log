@@ -1,0 +1,51 @@
+﻿  main.cpp
+  ofApp.cpp
+c:\users\kaiman\documents\openframeworks\libs\openframeworks\math\ofmatrix4x4.h(326): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data (compiling source file src\main.cpp)
+c:\users\kaiman\documents\openframeworks\libs\openframeworks\math\ofmatrix4x4.h(331): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data (compiling source file src\main.cpp)
+c:\users\kaiman\documents\openframeworks\libs\openframeworks\math\ofmatrix4x4.h(912): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data (compiling source file src\main.cpp)
+c:\users\kaiman\documents\openframeworks\libs\openframeworks\math\ofmatrix4x4.h(913): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data (compiling source file src\main.cpp)
+c:\users\kaiman\documents\openframeworks\libs\openframeworks\math\ofmatrix4x4.h(914): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data (compiling source file src\main.cpp)
+c:\users\kaiman\documents\openframeworks\libs\openframeworks\math\ofmatrix4x4.h(915): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data (compiling source file src\main.cpp)
+c:\users\kaiman\documents\openframeworks\libs\openframeworks\math\ofmatrix4x4.h(326): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data (compiling source file src\ofApp.cpp)
+c:\users\kaiman\documents\openframeworks\libs\openframeworks\math\ofmatrix4x4.h(331): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data (compiling source file src\ofApp.cpp)
+c:\users\kaiman\documents\openframeworks\libs\openframeworks\math\ofmatrix4x4.h(912): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data (compiling source file src\ofApp.cpp)
+c:\users\kaiman\documents\openframeworks\libs\openframeworks\math\ofmatrix4x4.h(913): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data (compiling source file src\ofApp.cpp)
+c:\users\kaiman\documents\openframeworks\libs\openframeworks\math\ofmatrix4x4.h(914): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data (compiling source file src\ofApp.cpp)
+c:\users\kaiman\documents\openframeworks\libs\openframeworks\math\ofmatrix4x4.h(915): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data (compiling source file src\ofApp.cpp)
+c:\users\kaiman\documents\openframeworks\addons\ofxliquidfun\src\ofxbox2dpolygonutils.h(103): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data (compiling source file src\main.cpp)
+c:\users\kaiman\documents\openframeworks\addons\ofxliquidfun\src\ofxbox2dpolygonutils.h(154): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data (compiling source file src\main.cpp)
+c:\users\kaiman\documents\openframeworks\addons\ofxliquidfun\src\ofxbox2dpolygonutils.h(186): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data (compiling source file src\main.cpp)
+c:\users\kaiman\documents\openframeworks\addons\ofxliquidfun\src\ofxbox2dpolygonutils.h(239): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data (compiling source file src\main.cpp)
+c:\users\kaiman\documents\openframeworks\addons\ofxliquidfun\src\ofxbox2dpolygonutils.h(256): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data (compiling source file src\main.cpp)
+c:\users\kaiman\documents\openframeworks\addons\ofxliquidfun\src\ofxbox2dpolygonutils.h(328): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data (compiling source file src\main.cpp)
+c:\users\kaiman\documents\openframeworks\addons\ofxliquidfun\src\ofxbox2dpolygonutils.h(329): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data (compiling source file src\main.cpp)
+c:\users\kaiman\documents\openframeworks\addons\ofxliquidfun\src\ofxbox2dpolygonutils.h(468): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data (compiling source file src\main.cpp)
+c:\users\kaiman\documents\openframeworks\addons\ofxliquidfun\src\ofxbox2dpolygonutils.h(498): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data (compiling source file src\main.cpp)
+c:\users\kaiman\documents\openframeworks\addons\ofxliquidfun\src\ofxbox2dpolygonutils.h(103): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data (compiling source file src\ofApp.cpp)
+c:\users\kaiman\documents\openframeworks\addons\ofxliquidfun\src\ofxbox2dpolygonutils.h(154): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data (compiling source file src\ofApp.cpp)
+c:\users\kaiman\documents\openframeworks\addons\ofxliquidfun\src\ofxbox2dpolygonutils.h(186): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data (compiling source file src\ofApp.cpp)
+c:\users\kaiman\documents\openframeworks\addons\ofxliquidfun\src\ofxbox2dpolygonutils.h(239): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data (compiling source file src\ofApp.cpp)
+c:\users\kaiman\documents\openframeworks\addons\ofxliquidfun\src\ofxbox2dpolygonutils.h(256): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data (compiling source file src\ofApp.cpp)
+c:\users\kaiman\documents\openframeworks\addons\ofxliquidfun\src\ofxbox2dpolygonutils.h(328): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data (compiling source file src\ofApp.cpp)
+c:\users\kaiman\documents\openframeworks\addons\ofxliquidfun\src\ofxbox2dpolygonutils.h(329): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data (compiling source file src\ofApp.cpp)
+c:\users\kaiman\documents\openframeworks\addons\ofxliquidfun\src\ofxbox2dpolygonutils.h(468): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data (compiling source file src\ofApp.cpp)
+c:\users\kaiman\documents\openframeworks\addons\ofxliquidfun\src\ofxbox2dpolygonutils.h(498): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data (compiling source file src\ofApp.cpp)
+c:\users\kaiman\documents\openframeworks\apps\myapps\dg 2019\src\ofapp.cpp(66): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+c:\users\kaiman\documents\openframeworks\libs\openframeworks\graphics\ofpolyline.inl(743): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data (compiling source file src\ofApp.cpp)
+  c:\users\kaiman\documents\openframeworks\libs\openframeworks\graphics\ofpolyline.inl(740): note: while compiling class template member function 'void ofPolyline_<ofDefaultVertexType>::simplify(float)' (compiling source file src\ofApp.cpp)
+  c:\users\kaiman\documents\openframeworks\apps\myapps\dg 2019\src\ofapp.cpp(135): note: see reference to function template instantiation 'void ofPolyline_<ofDefaultVertexType>::simplify(float)' being compiled
+  c:\users\kaiman\documents\openframeworks\libs\openframeworks\gl\ofglrenderer.h(232): note: see reference to class template instantiation 'ofPolyline_<ofDefaultVertexType>' being compiled (compiling source file src\ofApp.cpp)
+     Creating library bin\DG 2019.lib and object bin\DG 2019.exp
+  LINK : /LTCG specified but no code generation required; remove /LTCG from the link command line to improve linker performance
+  DG 2019.vcxproj -> C:\Users\Kaiman\Documents\openFrameworks\apps\myApps\DG 2019\bin\DG 2019.exe
+  
+  	                   2	C:\Users\Kaiman\Documents\openFrameworks\libs\fmodex\lib\vs\x64\
+  	  *EXTRA File 		 1266176	C:\Users\Kaiman\Documents\openFrameworks\apps\myApps\DG 2019\bin\fmodex.dll
+  	  *EXTRA File 		 1312768	C:\Users\Kaiman\Documents\openFrameworks\apps\myApps\DG 2019\bin\fmodexL.dll
+  	  *EXTRA File 		 6942208	C:\Users\Kaiman\Documents\openFrameworks\apps\myApps\DG 2019\bin\FreeImage.dll
+  
+  	                   1	C:\Users\Kaiman\Documents\openFrameworks\libs\FreeImage\lib\vs\x64\
+  	  *EXTRA File 		 1266176	C:\Users\Kaiman\Documents\openFrameworks\apps\myApps\DG 2019\bin\fmodex.dll
+  	  *EXTRA File 		 1503232	C:\Users\Kaiman\Documents\openFrameworks\apps\myApps\DG 2019\bin\fmodex64.dll
+  	  *EXTRA File 		 1312768	C:\Users\Kaiman\Documents\openFrameworks\apps\myApps\DG 2019\bin\fmodexL.dll
+  	  *EXTRA File 		 1552384	C:\Users\Kaiman\Documents\openFrameworks\apps\myApps\DG 2019\bin\fmodexL64.dll

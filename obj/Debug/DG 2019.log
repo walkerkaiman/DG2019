@@ -1,0 +1,15 @@
+﻿  ofApp.cpp
+c:\users\kaiman\documents\openframeworks\apps\myapps\dg 2019\src\ofapp.cpp(123): warning C4018: '<': signed/unsigned mismatch
+c:\users\kaiman\documents\openframeworks\apps\myapps\dg 2019\src\ofapp.cpp(148): warning C4018: '<': signed/unsigned mismatch
+c:\users\kaiman\documents\openframeworks\apps\myapps\dg 2019\src\ofapp.cpp(154): warning C4018: '<': signed/unsigned mismatch
+c:\users\kaiman\documents\openframeworks\apps\myapps\dg 2019\src\ofapp.cpp(176): warning C4018: '<': signed/unsigned mismatch
+c:\users\kaiman\documents\openframeworks\apps\myapps\dg 2019\src\ofapp.cpp(177): warning C4018: '<': signed/unsigned mismatch
+     Creating library bin\DG 2019_debug.lib and object bin\DG 2019_debug.exp
+  DG 2019.vcxproj -> C:\Users\Kaiman\Documents\openFrameworks\apps\myApps\DG 2019\bin\DG 2019_debug.exe
+  
+  	                   2	C:\Users\Kaiman\Documents\openFrameworks\libs\fmodex\lib\vs\Win32\
+  	  *EXTRA File 		 6018560	C:\Users\Kaiman\Documents\openFrameworks\apps\myApps\DG 2019\bin\FreeImage.dll
+  
+  	                   1	C:\Users\Kaiman\Documents\openFrameworks\libs\FreeImage\lib\vs\Win32\
+  	  *EXTRA File 		 1266176	C:\Users\Kaiman\Documents\openFrameworks\apps\myApps\DG 2019\bin\fmodex.dll
+  	  *EXTRA File 		 1312768	C:\Users\Kaiman\Documents\openFrameworks\apps\myApps\DG 2019\bin\fmodexL.dll
