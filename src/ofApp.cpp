@@ -6,7 +6,6 @@ void ofApp::setup(){
     // Window Setup
     ofSetVerticalSync(true);
     ofSetFrameRate(FRAME_RATE);
-    ofBackground(ofColor::white);
     
     // Box2D Setup
     box2d.init();
@@ -27,19 +26,19 @@ void ofApp::setup(){
         ofVec2f position(ofRandom(ofGetWidth()), ofRandom(ofGetHeight()));
         
         if (ofRandom(1) > .3) {
-            particles.setColor(ofColor::pink);
+            particles.setColor(ofColor::white);
         }else {
-            particles.setColor(ofColor::teal);
+            particles.setColor(ofColor::white);
         }
         
         particles.createParticle(position.x, position.y, velocity.x, velocity.y);
     }
 
 	// Spout Setup
-	screenBuffer.allocate(ofGetScreenWidth(), ofGetScreenHeight());
-	screenBuffer.begin();
+	videoBuffer.allocate(ofGetScreenWidth(), ofGetScreenHeight());
+	videoBuffer.begin();
 	ofClear(ofColor::white);
-	screenBuffer.end();
+	videoBuffer.end();
 }
 
 //--------------------------------------------------------------
@@ -50,7 +49,7 @@ void ofApp::update(){
         flipGravity();
     }
 
-	screenBuffer.begin();
+	videoBuffer.begin();
 	ofClear(ofColor::black);
 	ofEnableBlendMode(OF_BLENDMODE_ADD);
 	particles.draw();
@@ -84,15 +83,16 @@ void ofApp::update(){
 			line.draw();
 		}
 	}
-	screenBuffer.end();
-	spout.sendTexture(screenBuffer.getTexture(), "Fluid Simulator");
+	videoBuffer.end();
+
+	spout.sendTexture(videoBuffer.getTexture(), "Fluid Simulator");
 }
 
 //--------------------------------------------------------------
 void ofApp::draw() {
-	ofSetColor(255);
+	ofSetColor(ofColor::white);
 	ofClear(ofColor::black);
-	screenBuffer.draw(0, 0);
+	videoBuffer.draw(0, 0);
 }
 
 //--------------------------------------------------------------
