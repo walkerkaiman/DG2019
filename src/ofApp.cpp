@@ -2,96 +2,71 @@
 #include <fstream>
 
 //--------------------------------------------------------------
-void ofApp::setup(){
+void ofApp::setup() {
+	loadJSON(PARAMETERS_FILENAME);
+
     // Window Setup
     ofSetVerticalSync(true);
     ofSetFrameRate(FRAME_RATE);
-    
+
+	// Simple Serial Setup
+	serial.setup(parameters.serialPort, parameters.baudRate);
+	serial.startContinuousRead();
+	ofAddListener(serial.NEW_MESSAGE, this, &ofApp::setGravityFromSensor);
+
     // Box2D Setup
     box2d.init();
     box2d.setFPS(FRAME_RATE/2);
+	box2d.setGravity(parameters.gravityIntensity, 0);
     box2d.createBounds();
-    flipGravity();
     
     // Liquid Fun Setup
-    particles.loadImage("particleSprite.png");
-    particles.setup(box2d.getWorld(), MAX_PARTICLE_POPULATION, PARTICLE_LIFETIME_SECONDS, COLLIDER_SIZE, PARTICLE_SIZE, ofColor::white);
-    particles.setParticleFlag(b2_viscousParticle);
+	loadLinesFromFile();
 
-    loadLinesFromFile();
+    particles.loadImage(parameters.spriteFilename);
+    particles.setParticleFlag(b2_elasticParticle);
+	particles.setup(box2d.getWorld(), parameters.particlePopulation, parameters.particleLifetimeSeconds, parameters.colliderSize, parameters.spriteSize, ofColor::white);
+
+    const ofVec2f VELOCITY(0, 0);
     
-    ofVec2f velocity(0, 0);
-    
-    for (int i = 0; i < INITIAL_PARTICLE_POPULATION; i++) {
+    for (int i = 0; i < parameters.particlePopulation; i++) {
         ofVec2f position(ofRandom(ofGetWidth()), ofRandom(ofGetHeight()));
-        
-        if (ofRandom(1) > .3) {
-            particles.setColor(ofColor::white);
-        }else {
-            particles.setColor(ofColor::white);
-        }
-        
-        particles.createParticle(position.x, position.y, velocity.x, velocity.y);
+        particles.createParticle(position.x, position.y, VELOCITY.x, VELOCITY.y);
     }
 
 	// Spout Setup
 	videoBuffer.allocate(ofGetScreenWidth(), ofGetScreenHeight());
 	videoBuffer.begin();
-	ofClear(ofColor::white);
+	ofClear(BACKGROUND_COLOR);
 	videoBuffer.end();
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-    box2d.update();
-    
-    if (isFlippingGravity()) {
-        flipGravity();
-    }
+	if (ofGetFrameNum() % parameters.serialRequestFrequency == 0) {
+		serial.sendRequest();
+	}
 
+    box2d.update();
+
+	// Package Spout video buffer
 	videoBuffer.begin();
-	ofClear(ofColor::black);
+
+	ofClear(BACKGROUND_COLOR);
 	ofEnableBlendMode(OF_BLENDMODE_ADD);
 	particles.draw();
 	ofEnableBlendMode(OF_BLENDMODE_ALPHA);
 
 	if (isEditMode) {
-		displayReticle(10, 3, ofColor(255, 0, 0, 127));
-
-		ofSetColor(ofColor::red);
-
-		// Draw a line from the last vertex of line to the current mouse position.
-		if (lines.size() > 0) {
-			int lastLineSize = lines.back().size();
-
-			if (lastLineSize > 0 && drawingGuide) {
-				ofPoint mouse;
-				mouse.set(mouseX, mouseY);
-
-				ofPoint lastPoint = lines.back().getVertices()[lastLineSize - 1];
-
-				ofPolyline tempLine;
-				tempLine.addVertex(lastPoint);
-				tempLine.addVertex(mouse);
-
-				tempLine.draw();
-			}
-		}
-
-		// Draws a line for all collider edges
-		for (auto line : lines) {
-			line.draw();
-		}
+		displayColliders();
 	}
-	videoBuffer.end();
 
-	spout.sendTexture(videoBuffer.getTexture(), "Fluid Simulator");
+	videoBuffer.end();
+	spoutServer.sendTexture(videoBuffer.getTexture(), parameters.spoutServerName);
 }
 
 //--------------------------------------------------------------
 void ofApp::draw() {
-	ofSetColor(ofColor::white);
-	ofClear(ofColor::black);
 	videoBuffer.draw(0, 0);
 }
 
@@ -104,9 +79,6 @@ void ofApp::keyReleased(int key){
         if (isEditMode) {
             drawingGuide = false;
         }
-    }
-    else if (key == 'g' || key == 'G') {
-        flipGravity();
     }
     else if (key == OF_KEY_DEL || key == OF_KEY_BACKSPACE) {
         if (isEditMode && lines.size() > 0 && edges.size() > 0) {
@@ -146,7 +118,7 @@ void ofApp::createEdgeFromLine () {
 
 void ofApp::loadLinesFromFile() {
     fstream fin;
-    string fileName = ofToDataPath("lines.txt");
+    string fileName = ofToDataPath(parameters.linesFilename);
     fin.open(fileName.c_str(), ios::in);
     
     if(fin.is_open()) {
@@ -183,27 +155,31 @@ void ofApp::loadLinesFromFile() {
 }
 
 void ofApp::saveLinesToFile() {
-    ofstream f;
-    f.clear();
-    f.open(ofToDataPath("lines.txt").c_str());
-    
-    for (int i = 0; i < lines.size(); i++) {
-        for (int j = 0; j < lines[i].size(); j++) {
-            float x = lines[i][j].x;
-            float y = lines[i][j].y;
-            f << x << "," << y << ",";
-        }
-        
-        f << "\n";
-    }
-    f.close();
+	bool successfullyRemovedOldFile = ofFile::removeFile(parameters.linesFilename, true);
+
+	if (successfullyRemovedOldFile) {
+		ofstream f;
+		f.clear();
+		f.open(ofToDataPath(parameters.linesFilename).c_str());
+
+		for (int i = 0; i < lines.size(); i++) {
+			for (int j = 0; j < lines[i].size(); j++) {
+				float x = lines[i][j].x;
+				float y = lines[i][j].y;
+				f << x << "," << y << ",";
+			}
+
+			f << "\n";
+		}
+
+		f.close();
+		ofLog(OF_LOG_NOTICE, "Created new save with collider data.");
+	}else{
+		ofLog(OF_LOG_WARNING, "Was not able to remove old collider data file.");
+	}
 }
 
-bool ofApp::isFlippingGravity() {
-    return ofGetFrameNum() % (GRAVITY_FLIP_RATE_SECONDS * FRAME_RATE) == 0;
-}
-
-void ofApp::displayReticle(float size, float width, ofColor color) {
+void ofApp::displayReticle(const float & size, const float & width, const ofColor & color) {
     ofVec2f offset (mouseX, mouseY);
     ofSetColor(color.r, color.g, color.b, color.a);
     ofSetLineWidth(width);
@@ -219,37 +195,62 @@ void ofApp::displayReticle(float size, float width, ofColor color) {
     horizontal.draw();
 }
 
-void ofApp::flipGravity() {
-    // Randomly select one of the four walls
-    int selector = (int)ofRandom(4);
-    
-    // This while loop will make sure that the gravity is different each time it flips.
-    while (selector == pGravitySelector) {
-        selector = (int)ofRandom(4);
-    }
-    
-    ofVec2f gravityDirection = ofVec2f(0, 0);
-    
-    switch(selector) {
-        case 0: // Gravity Down
-            gravityDirection.y = 1;
-            break;
-        case 1: // Gravity Up
-            gravityDirection.y = -1;
-            break;
-        case 2: // Gravity Right
-            gravityDirection.x = 1;
-            break;
-        case 3: // Gravity Left
-            gravityDirection.x = -1;
-            break;
-    }
-    
-    ofVec2f gravityVector = ofVec2f(gravityDirection.x, gravityDirection.y) * GRAVITY_INTENSITY;
-    box2d.setGravity(gravityVector);
-    pGravitySelector = selector;
+void ofApp::displayColliders() {
+	displayReticle(parameters.reticleSize, parameters.reticleStrokeWeight, RETICLE_COLOR);
+
+	ofSetColor(ofColor::red);
+
+	// Draw a line from the last vertex of line to the current mouse position.
+	if (lines.size() > 0) {
+		int lastLineSize = lines.back().size();
+
+		if (lastLineSize > 0 && drawingGuide) {
+			ofPoint mouse;
+			mouse.set(mouseX, mouseY);
+
+			ofPoint lastPoint = lines.back().getVertices()[lastLineSize - 1];
+
+			ofPolyline tempLine;
+			tempLine.addVertex(lastPoint);
+			tempLine.addVertex(mouse);
+
+			tempLine.draw();
+		}
+	}
+
+	// Draws a line for all collider edges
+	for (auto line : lines) {
+		line.draw();
+	}
 }
 
 void ofApp::exit() {
-	spout.exit();
+	saveJSON(PARAMETERS_FILENAME);
+	spoutServer.exit();
+}
+
+void ofApp::loadJSON(const string & filename) {
+	ofFile file(filename);
+
+	if (file.exists()) {
+		jsonin ji(file);
+		ji >> parameters;
+	}
+	else {
+		ofLog(OF_LOG_WARNING, "JSON file not found. Using default values...");
+	}
+}
+
+void ofApp::saveJSON(const string & filename) {
+	ofFile file(filename, ofFile::WriteOnly);
+	jsonout jo(file);
+	jo << parameters;
+}
+
+void ofApp::setGravityFromSensor(string & message) {
+	float sensorAngle = ofToFloat(message);
+	float gravityDirection = ofMap(sensorAngle, parameters.sensorMin, parameters.sensorMax, -parameters.gravityIntensity, parameters.gravityIntensity, true);
+	box2d.setGravity(ofVec2f(-gravityDirection, 0));
+
+	if (isEditMode) { ofLog(OF_LOG_NOTICE, message); }
 }

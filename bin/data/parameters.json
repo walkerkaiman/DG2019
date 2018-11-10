@@ -1,0 +1,19 @@
+{
+    "value0": {
+        "serialPort": "COM4",
+        "baudRate": 9600,
+        "serialRequestFrequency": 50,
+        "particlePopulation": 5000,
+        "sensorMin": 0,
+        "sensorMax": 180,
+        "spriteSize": 32,
+        "particleLifetimeSeconds": 0,
+        "colliderSize": 10,
+        "gravityIntensity": 2,
+        "reticleSize": 10,
+        "reticleStrokeWeight": 3,
+        "spriteFilename": "particleSprite.png",
+        "linesFilename": "lines.txt",
+        "spoutServerName": "Fluid Simulator"
+    }
+}
