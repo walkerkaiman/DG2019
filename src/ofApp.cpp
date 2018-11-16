@@ -35,10 +35,7 @@ void ofApp::setup() {
     }
 
 	// Spout Setup
-	videoBuffer.allocate(ofGetScreenWidth(), ofGetScreenHeight());
-	videoBuffer.begin();
-	ofClear(BACKGROUND_COLOR);
-	videoBuffer.end();
+
 }
 
 //--------------------------------------------------------------
@@ -48,26 +45,18 @@ void ofApp::update(){
 	}
 
     box2d.update();
-
-	// Package Spout video buffer
-	videoBuffer.begin();
-
-	ofClear(BACKGROUND_COLOR);
-	ofEnableBlendMode(OF_BLENDMODE_ADD);
-	particles.draw();
-	ofEnableBlendMode(OF_BLENDMODE_ALPHA);
-
-	if (isEditMode) {
-		displayColliders();
-	}
-
-	videoBuffer.end();
-	spoutServer.sendTexture(videoBuffer.getTexture(), parameters.spoutServerName);
 }
 
 //--------------------------------------------------------------
 void ofApp::draw() {
-	videoBuffer.draw(0, 0);
+    ofClear(BACKGROUND_COLOR);
+    ofEnableBlendMode(OF_BLENDMODE_ADD);
+    particles.draw();
+    ofEnableBlendMode(OF_BLENDMODE_ALPHA);
+    
+    if (isEditMode) {
+        displayColliders();
+    }
 }
 
 //--------------------------------------------------------------
@@ -226,7 +215,7 @@ void ofApp::displayColliders() {
 
 void ofApp::exit() {
 	saveJSON(PARAMETERS_FILENAME);
-	spoutServer.exit();
+	//spoutServer.exit();
 }
 
 void ofApp::loadJSON(const string & filename) {

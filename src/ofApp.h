@@ -2,7 +2,6 @@
 
 #include "ofMain.h"
 #include "ofxLiquidFun.h"
-#include "ofxSpout2Sender.h"
 #include "ofxCereal.h"
 #include "ofxSimpleSerial.h"
 //#include "ofxOpenCv.h"
@@ -73,8 +72,7 @@ class ofApp : public ofBaseApp{
 		vector <shared_ptr<ofxBox2dEdge>> edges;
 
 		// Spout
-		ofxSpout2::Sender spoutServer;
-		ofFbo videoBuffer;
+
 
 		// Program specific functions
 		void loadLinesFromFile();

@@ -1,2 +1,3 @@
+ofxCereal
 ofxLiquidFun
-ofxSpout2
+ofxSimpleSerial
